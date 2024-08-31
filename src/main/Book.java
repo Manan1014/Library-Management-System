@@ -1,18 +1,16 @@
 package com.example.library;
 
-import java.util.UUID;
-
 public class Book {
 
-    private String id;
+    private String isbn;
     private String title;
     private String author;
     private int publicationYear;
     private boolean available;
 
     // Constructor
-    public Book(String title, String author, int publicationYear) {
-        this.id = UUID.randomUUID().toString();  // Generate unique ID
+    public Book(String isbn, String title, String author, int publicationYear) {
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -21,7 +19,7 @@ public class Book {
 
     // Getter methods
     public String getId() {
-        return id;
+        return isbn;
     }
 
     public String getTitle() {
