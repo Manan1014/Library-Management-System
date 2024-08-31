@@ -4,9 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+import org.junit.Before;
 
 public class BookTest {
 
+    //add book
     @Test
     public void testBookCreation() {
         // Create a Book instance with test data
@@ -37,5 +39,35 @@ public class BookTest {
 
         // Optional: Check the size of the collection to ensure only one book was added
         assertEquals("Library should contain only one unique book.", 1, l.getBooks().size());
+    }
+
+    //borrow book
+    private Library library;
+    private Book availableBook;
+    private Book borrowedBook;
+
+    @Before
+    public void setUp() {
+        library = new Library();
+        availableBook = new Book("1234567890", "Title One", "Author One", 2024);
+        borrowedBook = new Book("0987654321", "Title Two", "Author Two", 2025);
+        library.addBook(availableBook);
+    }
+
+    @Test
+    public void testBorrowAvailableBook() {
+        boolean result = library.borrowBook(availableBook.getId());
+        assertTrue("The book should be successfully borrowed.", result);
+        assertFalse("The book should be marked as not available after borrowing.", availableBook.isAvailable());
+    }
+
+    @Test
+    public void testBorrowUnavailableBook() {
+        // First, borrow the book to make it unavailable
+        library.borrowBook(availableBook.getId());
+
+        // Try borrowing the same book again
+        boolean result = library.borrowBook(availableBook.getId());
+        assertFalse("The book should not be borrowed if it is already unavailable.", result);
     }
 }
