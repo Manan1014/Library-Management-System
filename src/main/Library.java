@@ -84,4 +84,15 @@ public class Library {
         return books.values();
     }
 
+    //view book 
+    public void viewAvailableBooks() {
+        for (Map.Entry<String, Book> entry : books.entrySet()) {
+            String id = entry.getValue().getId();
+            boolean isBorrowed = borrowedStatus.getOrDefault(id, false);
+            if (!isBorrowed) {
+                System.out.println("Available Book: " + entry.getValue().getTitle()
+                        + " by " + entry.getValue().getAuthor());
+            }
+        }
+    }
 }
