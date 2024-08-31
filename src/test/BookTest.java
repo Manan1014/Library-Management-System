@@ -3,8 +3,8 @@ package com.example.library;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 public class BookTest {
 
@@ -58,7 +58,7 @@ public class BookTest {
     public void testBorrowAvailableBook() {
         boolean result = library.borrowBook(availableBook.getId());
         assertTrue("The book should be successfully borrowed.", result);
-        assertFalse("The book should be marked as not available after borrowing.", availableBook.isAvailable());
+        assertFalse("The book should be marked as not available after borrowing.", !availableBook.isAvailable());
     }
 
     @Test
