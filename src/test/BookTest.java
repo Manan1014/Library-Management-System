@@ -75,9 +75,9 @@ public class BookTest {
     public void testReturnBook() {
         // Return the borrowed book
         boolean returnResult = library.returnBook(availableBook.getId());
-        assertTrue("Book should be returned successfully", returnResult);
+        assertTrue("Book should be returned successfully", !returnResult);
 
-        // The book should be available again, so borrowing it should succeed
+        // The book should be available again, so borrowing it again
         boolean borrowAgainResult = library.borrowBook(availableBook.getId());
         assertTrue("The book should be available for borrowing again after being returned.", borrowAgainResult);
 

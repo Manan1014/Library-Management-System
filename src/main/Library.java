@@ -59,6 +59,26 @@ public class Library {
         return null;
     }
 
+    //return a book
+    public boolean returnBook(String id) {
+        if (borrowedStatus.containsKey(id)) {
+            if (borrowedStatus.get(id)) {
+                borrowedStatus.put(id, false); // Mark the book as returned
+                return true; // Successfully returned
+            } else {
+                System.out.println("Book was not borrowed.");
+                return false; // Book was not borrowed
+            }
+        } else {
+            System.out.println("Book not found.");
+            return false; // Book not found
+        }
+    }
+
+    public boolean isBorrowed(String id) {
+        return borrowedStatus.getOrDefault(id, false);
+    }
+
     // Method to get a book from the library
     public Collection<Book> getBooks() {
         return books.values();
