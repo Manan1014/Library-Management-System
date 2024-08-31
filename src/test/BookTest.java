@@ -14,7 +14,7 @@ public class BookTest {
         // Create a Book instance with test data
 
         Book b1 = new Book("12", "Java", "Joshua Bloch", 2008);
-        Library l = new Library();
+        Library library = new Library();
         // Verify the properties of the book
         assertEquals("12", b1.getId());
         assertEquals("Java", b1.getTitle());
@@ -27,14 +27,14 @@ public class BookTest {
 
     @Test
     public void testAddDuplicateBook() {
-        Library l = new Library();
+        // Library library = new Library();
         Book book1 = new Book("1234567890", "Title One", "Author One", 2024);
-        l.addBook(book1);
+        library.addBook(book1);
 
         Book book2 = new Book("1234567890", "Title One", "Author One", 2024); // Duplicate
 
         // Check if the book is detected as a duplicate and not added
-        boolean result = l.addBook(book2);
+        boolean result = library.addBook(book2);
         assertFalse("Duplicate book should not be added.", result);
 
         // Optional: Check the size of the collection to ensure only one book was added
@@ -48,9 +48,9 @@ public class BookTest {
 
     @Before
     public void setUp() {
-        library = new Library();
-        availableBook = new Book("1234567890", "Title One", "Author One", 2024);
-        borrowedBook = new Book("0987654321", "Title Two", "Author Two", 2025);
+        // library = new Library();
+        availableBook = new Book("1234567890", "book one", "A.M.Jorje", 2024);
+        borrowedBook = new Book("0987654321", "book two", "C.T.Trivedi", 2025);
         library.addBook(availableBook);
     }
 
@@ -84,6 +84,20 @@ public class BookTest {
         // Try returning a book with an invalid ID
         boolean invalidReturnResult = library.returnBook("8520");
         assertFalse("Return operation should fail for a non-existent or already returned book.", invalidReturnResult);
+    }
+
+    //view Testcase
+    @Test
+    public void testViewAvailableBooks() {
+        // Borrow one book to test the available books output
+        library.borrowBook("0987654321");
+
+        // Call the method that prints the available books
+        library.viewAvailableBooks();
+
+        // Capture the output and trim any leading or trailing whitespace
+        String output = outputStreamCaptor.toString().trim();
+
     }
 
 }
