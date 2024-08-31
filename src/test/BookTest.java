@@ -70,4 +70,20 @@ public class BookTest {
         boolean result = library.borrowBook(availableBook.getId());
         assertFalse("The book should not be borrowed if it is already unavailable.", result);
     }
+
+    @Test
+    public void testReturnBook() {
+        // Return the borrowed book
+        boolean returnResult = library.returnBook(availableBook.getId());
+        assertTrue("Book should be returned successfully", returnResult);
+
+        // The book should be available again, so borrowing it should succeed
+        boolean borrowAgainResult = library.borrowBook(availableBook.getId());
+        assertTrue("The book should be available for borrowing again after being returned.", borrowAgainResult);
+
+        // Try returning a book with an invalid ID
+        boolean invalidReturnResult = library.returnBook("8520");
+        assertFalse("Return operation should fail for a non-existent or already returned book.", invalidReturnResult);
+    }
+
 }
